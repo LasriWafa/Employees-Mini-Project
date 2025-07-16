@@ -1,0 +1,27 @@
+<div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
+<table class="employee-table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Department</th>
+      <th>Salary</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let emp of employees">
+      <td>{{ emp.name }}</td>
+      <td>{{ emp.email }}</td>
+      <td>{{ emp.department }}</td>
+      <td>{{ emp.salary | currency }}</td>
+      <td class="action-buttons">
+        <button [routerLink]="['/employees/edit', emp.id]">Edit</button>
+        <button (click)="deleteEmployee(emp.id!)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<button class="add-button" routerLink="/employees/new">Add New Employee</button>

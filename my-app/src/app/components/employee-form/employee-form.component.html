@@ -1,0 +1,36 @@
+<div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
+<form class="employee-form" [formGroup]="employeeForm" (ngSubmit)="onSubmit()" [class.disabled]="employeeForm.pending">
+
+  <input formControlName="id" type="hidden">
+
+  <label>Name:</label>
+  <input formControlName="name" type="text" autocomplete="off">
+  <div *ngIf="employeeForm.get('name')?.invalid && employeeForm.get('name')?.touched" class="error">
+    Name is required.
+  </div>
+
+  <label>Email:</label>
+  <input formControlName="email" type="email" autocomplete="off">
+  <div *ngIf="employeeForm.get('email')?.invalid && employeeForm.get('email')?.touched" class="error">
+    Enter a valid email.
+  </div>
+
+  <label>Department:</label>
+  <input formControlName="department" type="text" autocomplete="off">
+  <div *ngIf="employeeForm.get('department')?.invalid && employeeForm.get('department')?.touched" class="error">
+    Department is required.
+  </div>
+
+  <label>Salary:</label>
+  <input formControlName="salary" type="number" min="0" step="0.01" autocomplete="off">
+  <div *ngIf="employeeForm.get('salary')?.invalid && employeeForm.get('salary')?.touched" class="error">
+    Salary must be a positive number.
+  </div>
+
+  <button type="submit" [disabled]="employeeForm.invalid || employeeForm.pending">
+    {{ isEditMode ? 'Update' : 'Create' }}
+  </button>
+
+  <button type="button" routerLink="/employees">Cancel</button>
+</form>
